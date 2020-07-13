@@ -56,11 +56,11 @@ export default class SearchForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
                 <h5>Github korisničko ime:</h5>
-                <form onSubmit={this.initiateSearch}>
-                    <input type="text" value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder="npr. reactjs" />
-                    <input type="submit" value="Pretraži Github" />
+                <form className="form-group" onSubmit={this.initiateSearch}>
+                    <input className="col-md-3" type="text" value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder="npr. reactjs" /><br /><br />
+                    <input className="btn btn-primary" type="submit" value="Pretraži Github" />
                 </form>
             </div>
         )

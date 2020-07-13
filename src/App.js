@@ -2,8 +2,7 @@ import React from 'react';
 import SearchForm from './components/SearchComponent';
 import Results from './components/ResultsComponent';
 import { ReactComponent as Loading } from './styles/loading.svg';
-import './App.css';
-
+import './styles/bootstrap.css';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -39,8 +38,9 @@ export default class App extends React.Component {
     if(this.state.isResponseLoaded) {
       showResults = <Loading />
     }
+
     return (
-      <div className="App App-header">
+      <div>
         <header>
           <h1>Github pretraživanje</h1>
           <br />
@@ -54,5 +54,4 @@ export default class App extends React.Component {
       </div>
     );
   }
-
 }
