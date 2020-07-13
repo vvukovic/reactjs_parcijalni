@@ -1,6 +1,17 @@
 import React from 'react';
 
-export default function Results({ data }) {
+export default function Results({ data, isFirstLoad }) {
+    if(!isFirstLoad) {
+        let dataMsg = data.map((item) => item.message); // save message value to consume later
+
+        if(!data || data.length === 0) {
+            return 'Nema rezultata';
+        }
+
+        if(dataMsg.includes("Not Found") || ((Array.isArray(data.map((item) => item.repos)) && (data.map((item) => item.repos.length) === undefined)))) {
+            return 'Nismo pronašli navedeni traženi pojam. Probajte ponovo s drugim pojmom.';
+        }
+    }
 
     return (
         <ul>
@@ -12,7 +23,7 @@ export default function Results({ data }) {
                         <p style={{ fontWeight: 'bold', display: 'inline-block' }}>LOCATION:</p><span> {item.location}</span><br />
                         <p style={{ fontWeight: 'bold', display: 'inline-block' }}>REPOSITORIES:</p>
                         <ul>
-                            {item.repos.map((repo) => {
+                            {item.repos.length > 0 && item.repos.map((repo) => {
                                 return (
                                     <li style={{ listStyleType: 'none' }} key={repo.id + repo.name}>
                                         <span>{repo.name}</span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Variables from '../common/Variables';
+import PropTypes from 'prop-types';
 
 export default class SearchForm extends React.Component {
     constructor(props) {
@@ -7,7 +8,8 @@ export default class SearchForm extends React.Component {
 
         this.state = {
             searchQuery: '',
-            githubUserData: {}
+            githubUserData: {},
+            isResponseLoaded: false
         }
     }
 
@@ -19,7 +21,7 @@ export default class SearchForm extends React.Component {
         fetch(Variables.githubAPIUrl + searchQuery)
             .then(response => response.json())
             .then(dataObject => {
-                let userData = { avatarUrl: dataObject.avatar_url, name: dataObject.name, bio: dataObject.bio, location: dataObject.location };
+                let userData = { avatarUrl: dataObject.avatar_url, name: dataObject.name, bio: dataObject.bio, location: dataObject.location, message: dataObject.message };
                 return userData;
             })
             .then((userData) => this.SearchGithubReposAPI(searchQuery, userData))
@@ -33,7 +35,8 @@ export default class SearchForm extends React.Component {
                 let repoData = { ...data, repos: dataObject }
                 this.props.onSearchResult(repoData);
                 this.setState({
-                    searchQuery: ''
+                    searchQuery: '',
+                    isResponseLoaded: true
                 });
             })
             .catch(error => console.log("Greška: " + error));
@@ -45,6 +48,8 @@ export default class SearchForm extends React.Component {
         if (!this.state.searchQuery || this.state.searchQuery.length < 0) {
             return (alert('Molimo unesite Github ime repozitorija koji bi htjeli istražiti'));
         }
+
+        this.props.onSearchStart();
 
         this.SearchGithubUserAPI(this.state.searchQuery.trim());
     }
@@ -60,5 +65,9 @@ export default class SearchForm extends React.Component {
             </div>
         )
     }
+}
 
+SearchForm.propTypes = {
+    onSearchResult: PropTypes.func,
+    onSearchStart: PropTypes.func
 }
