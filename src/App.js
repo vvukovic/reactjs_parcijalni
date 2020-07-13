@@ -12,7 +12,8 @@ export default class App extends React.Component {
     this.state = {
       resultList: [],
       isResponseLoaded: false,
-      isFirstPageLoad: true
+      isFirstPageLoad: true,
+      isResetBtnVisible: false
     }
 
     this.baseState = this.state;
@@ -34,7 +35,7 @@ export default class App extends React.Component {
 
   render() {
 
-    let showResults = <Results data={this.state.resultList} isFirstLoad={this.state.isFirstPageLoad} onFormReset={this.handleFormReset} />
+    let showResults = <Results data={this.state.resultList} isFirstLoad={this.state.isFirstPageLoad} onFormReset={this.handleFormReset} isResetVisible={this.state.isResetBtnVisible} />
     if(this.state.isResponseLoaded) {
       showResults = <Loading />
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Results({ data, isFirstLoad, onFormReset }) {
+export default function Results({ data, isFirstLoad, onFormReset, isResetVisible }) {
     if(!isFirstLoad) {
         let dataMsg = data.map((item) => item.message); // save message value to consume later
 
@@ -12,11 +12,15 @@ export default function Results({ data, isFirstLoad, onFormReset }) {
         if(dataMsg.includes("Not Found") || ((Array.isArray(data.map((item) => item.repos)) && (data.map((item) => item.repos.length) === undefined)))) {
             return 'Nismo pronašli navedeni traženi pojam. Probajte ponovo s drugim pojmom.';
         }
+
+        isResetVisible = true;
     }
 
     const handleFormReset = () => {
         onFormReset();
     }
+
+    let resetBtn = <button onClick={handleFormReset} type="button">Reset</button>;
 
     return (
         <ul>
@@ -37,7 +41,7 @@ export default function Results({ data, isFirstLoad, onFormReset }) {
                             })}
                         </ul></li>)
             })}<br />
-            <button onClick={handleFormReset} type="button">Reset</button>
+            <span>{isResetVisible ? resetBtn : <div></div>}</span>
         </ul>
     )
 }
