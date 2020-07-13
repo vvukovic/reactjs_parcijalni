@@ -20,7 +20,7 @@ export default function Results({ data, isFirstLoad, onFormReset, isResetVisible
         onFormReset();
     }
 
-    let resetBtn = <button className="btn btn-secondary block" onClick={handleFormReset} type="button">Reset</button>;
+    let resetBtn = <button className="btn btn-secondary block col-md-3" onClick={handleFormReset} type="button">Reset</button>;
 
     return (
         <ul>
