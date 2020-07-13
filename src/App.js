@@ -27,6 +27,11 @@ export default class App extends React.Component {
   };
 
   render() {
+
+    let showResults = <Results data={this.state.resultList} isFirstLoad={this.state.isFirstPageLoad} />
+    if(this.state.isResponseLoaded) {
+      showResults = <Loading />
+    }
     return (
       <div className="App App-header">
         <header>
@@ -35,9 +40,9 @@ export default class App extends React.Component {
           <br />
         </header>
         <main>
-          <SearchForm onSearchResult={this.handleSearchResponse} onSearchStart={this.startSearch} isFirstLoad={this.state.isFirstPageLoad} />
+          <SearchForm onSearchResult={this.handleSearchResponse} onSearchStart={this.startSearch}  />
           <hr />
-          <Results data={this.state.resultList} />
+          {showResults ?? <div></div>}
         </main>
       </div>
     );
