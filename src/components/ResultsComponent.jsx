@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Results({ data, isFirstLoad }) {
+export default function Results({ data, isFirstLoad, onFormReset }) {
     if(!isFirstLoad) {
         let dataMsg = data.map((item) => item.message); // save message value to consume later
 
@@ -11,6 +12,10 @@ export default function Results({ data, isFirstLoad }) {
         if(dataMsg.includes("Not Found") || ((Array.isArray(data.map((item) => item.repos)) && (data.map((item) => item.repos.length) === undefined)))) {
             return 'Nismo pronašli navedeni traženi pojam. Probajte ponovo s drugim pojmom.';
         }
+    }
+
+    const handleFormReset = () => {
+        onFormReset();
     }
 
     return (
@@ -32,6 +37,11 @@ export default function Results({ data, isFirstLoad }) {
                             })}
                         </ul></li>)
             })}<br />
+            <button onClick={handleFormReset} type="button">Reset</button>
         </ul>
     )
+}
+
+Results.propTypes = {
+    data: PropTypes.array
 }

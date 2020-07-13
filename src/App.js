@@ -14,6 +14,8 @@ export default class App extends React.Component {
       isResponseLoaded: false,
       isFirstPageLoad: true
     }
+
+    this.baseState = this.state;
   }
 
   handleSearchResponse = (data) => {
@@ -26,9 +28,13 @@ export default class App extends React.Component {
     this.setState({ isResponseLoaded: true });
   };
 
+  handleFormReset = () => {
+    this.setState(this.baseState);
+  }
+
   render() {
 
-    let showResults = <Results data={this.state.resultList} isFirstLoad={this.state.isFirstPageLoad} />
+    let showResults = <Results data={this.state.resultList} isFirstLoad={this.state.isFirstPageLoad} onFormReset={this.handleFormReset} />
     if(this.state.isResponseLoaded) {
       showResults = <Loading />
     }
