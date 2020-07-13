@@ -36,12 +36,13 @@ export default class SearchForm extends React.Component {
                     searchQuery: ''
                 });
             })
+            .catch(error => console.log("Greška: " + error));
     }
 
     initiateSearch = (event) => {
         event.preventDefault();
 
-        if(!this.state.searchQuery || this.state.searchQuery.length < 0) {
+        if (!this.state.searchQuery || this.state.searchQuery.length < 0) {
             return (alert('Molimo unesite Github ime repozitorija koji bi htjeli istražiti'));
         }
 
@@ -49,14 +50,14 @@ export default class SearchForm extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <div>
                 <h5>Github korisničko ime:</h5>
                 <form onSubmit={this.initiateSearch}>
                     <input type="text" value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder="npr. reactjs" />
                     <input type="submit" value="Pretraži Github" />
                 </form>
-            </div>   
+            </div>
         )
     }
 

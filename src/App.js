@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchForm from './components/SearchComponent';
+import Results from './components/ResultsComponent';
 import './App.css';
 
 
@@ -13,7 +14,6 @@ export default class App extends React.Component {
   }
 
   handleSearchResponse = (data) => {
-    console.log(data);
     this.setState({
       resultList: [data]
     });
@@ -23,10 +23,17 @@ export default class App extends React.Component {
     return (
       <div className="App App-header">
         <header>
-          <SearchForm onSearchResult={this.handleSearchResponse} />
+          <h1>Github pretraživanje</h1>
+          <br />
+          <br />
         </header>
+        <main>
+          <SearchForm onSearchResult={this.handleSearchResponse} />
+          <hr />
+          <Results data={this.state.resultList} />
+        </main>
       </div>
     );
   }
-  
+
 }
