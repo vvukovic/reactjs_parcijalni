@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App App-header">
-      <header>
-        
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default App;
+  }
+
+  render() {
+    return (
+      <div className="App App-header">
+        <header>
+          Test
+        </header>
+      </div>
+    );
+  }
+  
+}
