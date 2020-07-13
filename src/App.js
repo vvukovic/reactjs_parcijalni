@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <header>
+        <header style={{ paddingTop: 50 }}>
           <h1>Github pretraživanje</h1>
           <br />
           <br />
